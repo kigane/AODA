@@ -1,0 +1,25 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "python run with params",
+            "type": "process",
+            "command": "python",
+            "args": [ 
+                "${file}", "--datarootA", 
+                "./dataset/scribble_dataset/images/pineapple", 
+                "--datarootB", "./dataset/scribble_dataset/scribbles/pineapple", 
+                "--name", "scribble_aoda", 
+                "--model", "aoda_gan", 
+                "--gan_mode", "vanilla", 
+                "--no_dropout", 
+                "--n_classes", "10", 
+                "--direction", "BtoA", 
+                "--load_size", "260"
+            ],
+            "group": "test",
+        },
+    ]
+}

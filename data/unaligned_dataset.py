@@ -1,9 +1,10 @@
 import os.path
 import random
 
+from PIL import Image
+
 from data.base_dataset import BaseDataset, get_transform
 from data.image_folder import make_dataset
-from PIL import Image
 
 from .util import scribble2idx, sketchycoco2idx
 
@@ -77,8 +78,11 @@ class UnalignedDataset(BaseDataset):
         B = self.transform_B(B_img)
 
         if self.opt.n_classes > 0:
-            A_nake = A_path.split("/")[-2]
-            B_nake = B_path.split("/")[-2]
+            #! window路径分隔符为\\
+            A_nake = os.path.split(os.path.split(A_path)[0])[1]
+            B_nake = os.path.split(os.path.split(B_path)[0])[1]
+            # A_nake = A_path.split("/")[-2]
+            # B_nake = B_path.split("/")[-2]
             if self.flag_scribble:
                 A_idx = scribble2idx(A_nake)  # sketch
                 B_idx = scribble2idx(B_nake)  # rgb
